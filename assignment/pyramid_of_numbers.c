@@ -41,11 +41,9 @@ int strtobig_int(const char *str, int len, struct BigInt *big_int);
 	len--;
 	int alreadyConvert;
 	for (size_t i = 0; i < len; i++) {
-		if(str[len] < "0" || str[len] > "9"){
-			len++;
+		if(str[len] < '0' || str[len] > '9'){
 			return 0;
 		}
-
 		big_int->digits_count = alreadyConvert;
 		return alreadyConvert;
 	}
@@ -70,7 +68,21 @@ void print_big_int(const struct BigInt *big_int);
 *** @param factor The int value which is multiplied by BigInt.
 *** @param *big_result The result of the multiplication.
 */
-void multiply(const struct BigInt *big_int, int factor, struct BigInt *big_result);
+void multiply(const struct BigInt *big_int, int factor, struct BigInt *big_result);{
+	int temp;
+	int overflow = 0;
+	for (size_t i = 0; i < big_int->digits_count; i++) {
+		big_result->digits_count = 1+i;
+		big_result->the_int[i] = 0;
+		temp = overflow * 100 + big_int->the_int[i];
+		if(temp <= divisor){
+			big_result->the_int[i] = temp / divisor;
+		}
+		else{
+			overflow = big_int->the_int[i];
+		}
+	}
+}
 
 /** divide() multiplies a BigInt by an int.
 *** @param big_int The BigInt to be divided.
