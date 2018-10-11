@@ -37,6 +37,11 @@ struct BigInt {
 * @return The number of characters converted.
 */
 int strtobig_int(const char *str, int len, struct BigInt *big_int);
+{
+	for (size_t i = 0; i < len; i++) {
+		
+	}
+}
 
 /** print_big_int() prints a BigInt.
 *** @param *big_int The BigInt to be printed.
@@ -81,7 +86,7 @@ int main(int argc, char *argv[])
   char userInput[MAX_DIGITS];
   printf("Please enter a number: \n");
   scanf("%s", userInput);
-  printf("%s\n", userInput);
-
+  printf("%s\n", userInput);	//!!!!
+	strtobig_int(*userInput, userInput.length, BigInt);
 	return 0;
 }
