@@ -47,7 +47,7 @@ int strtobig_int(const char *str, int len, struct BigInt *big_int);
 		}
 
 		big_int->digits_count = alreadyConvert;
-		return alreadyConvert;		
+		return alreadyConvert;
 	}
 }
 
@@ -55,6 +55,15 @@ int strtobig_int(const char *str, int len, struct BigInt *big_int);
 *** @param *big_int The BigInt to be printed.
 */
 void print_big_int(const struct BigInt *big_int);
+{
+	bool isNullFound = true;
+	for (size_t i = 0; i < digits_count->big_int; i++) {
+		if(big_int->the_int[i] > 0 || isNullFound == false){
+			printf("%s", big_int->the_int[i]);
+			isNullFound = false;
+		}
+	}
+}
 
 /** multiply() multiplies a BigInt by an int.
 *** @param big_int The BigInt to be multiplied.
