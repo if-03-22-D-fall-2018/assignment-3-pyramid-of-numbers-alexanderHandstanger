@@ -38,8 +38,16 @@ struct BigInt {
 */
 int strtobig_int(const char *str, int len, struct BigInt *big_int);
 {
+	len--;
+	int alreadyConvert;
 	for (size_t i = 0; i < len; i++) {
-		
+		if(str[len] < "0" || str[len] > "9"){
+			len++;
+			return 0;
+		}
+
+		big_int->digits_count = alreadyConvert;
+		return alreadyConvert;		
 	}
 }
 
