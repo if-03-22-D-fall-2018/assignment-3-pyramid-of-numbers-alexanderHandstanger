@@ -146,6 +146,8 @@ int main(int argc, char *argv[])
 	int convert;
 	struct BigInt bigint;
 	struct BigInt bigint_result;
+	int factor = 2;
+	int divisor = 2;
 	printf("Pyramid of Numbers\n");
   printf("\n");
   char userInput[MAX_DIGITS];
@@ -158,9 +160,18 @@ int main(int argc, char *argv[])
 	}
 	for (size_t i = 0; i < 9; i++) {
 		multiply(&bigInt,factor,&bigint_result);
-//!
-
+		bigintarray_invert(&bigint_result);
+		bigintarray_invert(&bigInt);
+		print_big_int(&bigint);
+		printf(" * %d", factor);
+		print_big_int(&bigint_result);
+		printf("\n");
+		bigintarray_invert(&bigint_result);
+		bigintarray_invert(&bigint);
+		bigint = bigint_result;
+		factor++;
 		}
+	bigintarray_invert(&bigint_result);
 	}
 	return 0;
 }
