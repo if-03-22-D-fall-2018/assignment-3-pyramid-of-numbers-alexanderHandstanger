@@ -111,7 +111,9 @@ void divide(const struct BigInt *big_int, int divisor, struct BigInt *big_result
 *** @param from The source where we want to copy from.
 *** @param *to The target where we want to copy to.
 */
-void copy_big_int(const struct BigInt *from, struct BigInt *to);
+void copy_big_int(const struct BigInt *from, struct BigInt *to);{
+	from = to;
+}
 
 /**
 *** main() reads the base number from which the pyramid has to be calculated
