@@ -89,7 +89,23 @@ void multiply(const struct BigInt *big_int, int factor, struct BigInt *big_resul
 *** @param divisor The int value by which we want to devide big_int.
 *** @param *big_result The result of the division.
 */
-void divide(const struct BigInt *big_int, int divisor, struct BigInt *big_result);
+void divide(const struct BigInt *big_int, int divisor, struct BigInt *big_result);{
+	int temp;
+	int overflow = 0;
+	for (size_t i = 0; i < big_int->digits_count; i++) {
+		big_result->the_int[i] = 0;
+		big_result->digits_count = i+1;
+		temp = overflow * 10 + big_int->the_int[i];
+		if (tempResult >= divisor) {
+				big_result->the_int[i] = tempResult / divisor;
+				overflowNumber = tempResult % divisor;
+			}
+			else
+			{
+				overflowNumber = big_int->the_int[i];
+			}
+	}
+}
 
 /** copy_big_int() copies a BigInt to another BigInt.
 *** @param from The source where we want to copy from.
