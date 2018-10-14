@@ -172,6 +172,17 @@ int main(int argc, char *argv[])
 		factor++;
 		}
 	bigintarray_invert(&bigint_result);
-	}
+	//divided
+	struct BigInt bigInt_result_devide;
+	for (size_t i = 0; i < 8; i++) {
+		print_big_int(&bigint_result);
+		divide(&bigint_result,divisor,&bigInt_result_devide);
+		bigint_result = bigInt_result_devide;
+		printf(" / %d = ",divisor);
+		print_big_int(&bigInt_result_devide);
+		printf("\n");
+		divisor++;
+		}
 	return 0;
+}
 }
