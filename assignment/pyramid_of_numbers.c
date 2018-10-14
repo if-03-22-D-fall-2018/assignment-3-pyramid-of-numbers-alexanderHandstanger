@@ -128,12 +128,17 @@ void copy_big_int(const struct BigInt *from, struct BigInt *to);{
 */
 int main(int argc, char *argv[])
 {
+	int lenght = 0;
+	int convert;
 	printf("Pyramid of Numbers\n");
   printf("\n");
   char userInput[MAX_DIGITS];
   printf("Please enter a number: \n");
   scanf("%s", userInput);
-  printf("%s\n", userInput);	//!!!!
-	strtobig_int(*userInput, userInput.length, BigInt);
+	lenght = strlen(input);
+	convert = strtobig_int(*userInput, userInput.length, BigInt);
+	if(Convert = 0){
+		return 0;
+	}
 	return 0;
 }
