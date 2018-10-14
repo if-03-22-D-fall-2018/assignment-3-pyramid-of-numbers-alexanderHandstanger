@@ -51,20 +51,20 @@ int strtobig_int(const char *str, int len, struct BigInt *big_int)
 		alreadyConverted++;
 		len--;
 	}
-	big_int->digits_count = converted;
-	return converted;
+	big_int->digits_count = alreadyConverted;
+	return alreadyConverted;
 }
 /** print_big_int() prints a BigInt.
 *** @param *big_int The BigInt to be printed.
 */
 void print_big_int(const struct BigInt *big_int)
 {
-	bool notnulldigitfound = false;
+	bool isNullFound = true;
 		for (int i = 0; i < big_int->digits_count; i++) {
-			if (big_int->the_int[i] > 0 || notnulldigitfound == true)
+			if (big_int->the_int[i] > 0 || isNullFound == false)
 			{
 							printf("%d",big_int->the_int[i]);
-							notnulldigitfound = true;
+							isNullFound = false;
 			}
 		}
 }
@@ -76,13 +76,13 @@ void print_big_int(const struct BigInt *big_int)
 */
 void multiply(const struct BigInt *big_int, int factor, struct BigInt *big_result)
 {
-	int overflowNumber=0;
+	int overflow=0;
 	int temp = 0;
 	int counter = big_int->digits_count;
 	big_result->digits_count = big_int->digits_count;
 	for (int i = 0; i < counter; i++) {
-		temp=big_int->the_int[i]*factor+overflowNumber;
-		overflowNumber = 0;
+		temp=big_int->the_int[i]*factor+overflow;
+		overflow = 0;
 		if (temp>9) {
 			if (i == big_int->digits_count-1)
 			{
@@ -90,13 +90,13 @@ void multiply(const struct BigInt *big_int, int factor, struct BigInt *big_resul
 				big_result->the_int[i]=temp%10;
 				big_result->the_int[i+1]=temp/10;
 			} else {
-				overflowNumber=temp/10;
+				overflow=temp/10;
 				big_result->the_int[i]=temp%10;
 			}
 		}
 		else
 		{
-			big_result->the_int[i]=tempResult;
+			big_result->the_int[i]=temp;
 		}
 	}
 
@@ -109,19 +109,19 @@ void multiply(const struct BigInt *big_int, int factor, struct BigInt *big_resul
 */
 void divide(const struct BigInt *big_int, int divisor, struct BigInt *big_result)
 {
-	int overflowNumber = 0;
+	int overflow = 0;
 	int temp;
 		for (size_t i = 0; i < big_int->digits_count; i++) {
 			big_result->the_int[i] = 0;
 			big_result->digits_count = i+1;
-			temp = overflowNumber*10 + big_int->the_int[i];
+			temp = overflow*10 + big_int->the_int[i];
 			if (temp >= divisor) {
 				big_result->the_int[i] = temp / divisor;
-				overflowNumber = temp % divisor;
+				overflow = temp % divisor;
 			}
 			else
 			{
-				overflowNumber = big_int->the_int[i];
+				overflow = big_int->the_int[i];
 			}
 
 		}
@@ -136,7 +136,7 @@ void copy_big_int(const struct BigInt *from, struct BigInt *to)
 	from = to;
 }
 
-void bigintarray_reverse(struct BigInt *big_int)
+void bigintarray_invert(struct BigInt *big_int)
 {
 	int i = big_int->digits_count-1;
   int j = 0;
@@ -187,18 +187,18 @@ int main(int argc, char *argv[])
 	}
 	for (size_t i = 0; i < 8; i++) {
 		multiply(&bigint,factor,&bigint_result);
-		bigintarray_reverse(&bigint_result);
-		bigintarray_reverse(&bigint);
+		bigintarray_invert(&bigint_result);
+		bigintarray_invert(&bigint);
 		print_big_int(&bigint);
 		printf(" * %d = ",factor);
 		print_big_int(&bigint_result);
 		printf("\n");
-		bigintarray_reverse(&bigint_result);
-		bigintarray_reverse(&bigint);
+		bigintarray_invert(&bigint_result);
+		bigintarray_invert(&bigint);
 		bigint = bigint_result;
 		factor++;
 	}
-	bigintarray_reverse(&bigint_result);
+	bigintarray_invert(&bigint_result);
 
 	for (size_t i = 0; i < 8; i++) {
 		print_big_int(&bigint_result);
