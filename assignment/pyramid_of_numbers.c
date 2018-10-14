@@ -55,9 +55,9 @@ int strtobig_int(const char *str, int len, struct BigInt *big_int);
 void print_big_int(const struct BigInt *big_int);
 {
 	bool isNullFound = true;
-	for (size_t i = 0; i < digits_count->big_int; i++) {
+	for (size_t i = 0; i < big_int->digits_count; i++) {
 		if(big_int->the_int[i] > 0 || isNullFound == false){
-			printf("%s", big_int->the_int[i]);
+			printf("%d", big_int->the_int[i]);
 			isNullFound = false;
 		}
 	}
@@ -71,10 +71,11 @@ void print_big_int(const struct BigInt *big_int);
 void multiply(const struct BigInt *big_int, int factor, struct BigInt *big_result);{
 	int temp;
 	int overflow = 0;
+	int counter = big_int->digits_count;
+	big_result->digits_count = big_int->digits_count;
 	for (size_t i = 0; i < big_int->digits_count; i++) {
-		big_result->digits_count = 1+i;
-		big_result->the_int[i] = 0;
-		temp = overflow * 100 + big_int->the_int[i];
+		temp = big_int->the_int[i]*factor+overflow;
+		overflow = 0;
 		if(temp <= divisor){
 			big_result->the_int[i] = temp / divisor;
 		}
