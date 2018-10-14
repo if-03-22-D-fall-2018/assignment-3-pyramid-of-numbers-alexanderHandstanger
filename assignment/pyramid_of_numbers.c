@@ -130,6 +130,8 @@ int main(int argc, char *argv[])
 {
 	int lenght = 0;
 	int convert;
+	struct BigInt bigint;
+	struct BigInt bigint_result;
 	printf("Pyramid of Numbers\n");
   printf("\n");
   char userInput[MAX_DIGITS];
@@ -139,6 +141,23 @@ int main(int argc, char *argv[])
 	convert = strtobig_int(*userInput, userInput.length, BigInt);
 	if(Convert = 0){
 		return 0;
+	}
+	for (size_t i = 0; i < 9; i++) {
+		multiply(&bigInt,factor,&bigint_result);
+//!
+		int i;
+		int j = 0;
+		i = big_int->digits_count-1;
+		while(i > j){
+			int temp;
+			int temp2;
+			temp = big_int->the_int[i];
+			temp2 = big_int->the_int[j];
+			big_int->the_int[i] = temp2;
+     	big_int->the_int[j] = temp;
+     	i--;
+		 	j++;
+		}
 	}
 	return 0;
 }
